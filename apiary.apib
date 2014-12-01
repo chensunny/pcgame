@@ -1,0 +1,551 @@
+FORMAT: 1A
+
+# test
+练习test
+Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+
+# Group friend
+对用户好友的操作
+Notes related resources of the **Notes API**
+
+
+## 获取所有好友的列表 [/friend/lists?userid=&{userid}]
+
+
++ Parameters
+
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+
+## 获取所有好友的列表 [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+            "errno": 0, 
+            "errmsg": "", 
+            "data": [
+                {
+                    "gid": "组id", 
+                    "gname": "同事", 
+                    "list": [
+                        "uid1", 
+                        "uid2", 
+                        "uid3"
+                    ]
+                }, 
+                {
+                    "gid": "组id", 
+                    "gname": "同事", 
+                    "list": [
+                        "uid1", 
+                        "uid2", 
+                        "uid3"
+                    ]
+                }
+            ]}
+
+
+## 添加好友 [/friend/add]
+
++ Parameters
+
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+    + adduserid (required, string, `360U1301556356`) ...被添加用户的id.
+    + groupid ( norequired,number, `1`) ... 组id,非必填；如果不填，则默认0，即放入‘未分组的人’里.
+
+## 添加好友 [POST]
++ Response 200 (application/json)
+
+    + Body
+
+            { errno  : 0/-1,errmsg :操作成功/参数错误 ,data :[]}
+
+##  删除好友 [/friend/del]
+
++ Parameters
+
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+    + deluserid (required, string, `360U1301556356`) ...被删除用户的id.
+  
+
+##  删除好友 [POST]
++ Response 200 (application/json)
+
+    + Body
+
+            { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}
+
+# Group Group
+对用户好友分组的操作
+Notes related resources of the **Notes API**
+
+
+## 获取所有分组列表 [/group/lists?userid={userid}]
++ Parameters
+    + userid (required, string, `360U1301556356`) ... 用户本人id.
+
+## 获取所有分组列表 [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+            "errno": 0,
+            "errmsg": "",
+            "data": [
+                {
+                    "gid": "分组id",
+                    "gname": "分组名"
+                },
+                {
+                    "gid": "分组id",
+                    "gname": "分组名"
+                }
+            ]}
+            
+## 添加分组 [/group/add]
++ Parameters
+    + userid (required, string, `360U1301556356`) ... 用户本人id.
+    + groupname (required, string, `好基友`) ... 分组名.
+
+## 添加分组 [POST]
++ Response 200 (application/json)
+    + Body
+    
+            { errno  : 0/-1,errmsg :操作成功/参数错误 ,data :[]}      
+
+##删除分组 [/group/del]
++ Parameters
+    + userid (required, string, `360U1301556356`) ... 用户本人id.
+    + groupid (required, number, `2`) ... 分组id.
+
+##删除分组 [POST]
++ Response 200 (application/json)
+    + Body
+    
+            { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}      
+
+
+##编辑分组 [/group/edit]
++ Parameters
+    + userid (required, string, `360U1301556356`) ... 用户本人id.
+    + groupid (required, number, `2`) ... 分组id.
+    + newgroupname (required, string, `同事`) ... 新的组名.
+    
+
+##编辑分组 [POST]
++ Response 200 (application/json)
+    + Body
+    
+            { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}   
+
+
+##移动好友到目标组 [/group/movefriend]
++ Parameters
+    + userid (required, string, `360U1301556539`) ... 用户本人id.
+    + moveduserid (required, string, `360U1301556356`) ... 被移动用户的id.
+    + togroupid (required, number, `2`) ... 新组的id.
+    
+
+##移动好友到目标组 [POST]
++ Response 200 (application/json)
+    + Body
+    
+            { errno  : 0/-1,errmsg :操作成功/参数错误 }
+
+# Group 黑名单
+
+##获取所有黑名单的列表 [/black/lists?userid={userid}]
++ Parameters
+    + userid (required, string, `360U1301556539`) ... 用户本人id.
+    
+##获取所有黑名单的列表 [GET]
++ Response 200 (application/json)
+    + Body
+    
+              {
+                    "errno": 0,
+                    "errmsg": "",
+                    "data": [
+                        "uid1",
+                        "uid2",
+                        "uid3"
+                    ]
+                }
+
+##添加用户黑名单 [/black/add]
++ Parameters
+    + userid (required, string, `360U1301556539`) ... 用户本人id.
+    + adduserid (required, string, `360U1301556356`) ...被添加用户的id.
+    
+##添加用户黑名单 [POST]
++ Response 200 (application/json)
+    + Body
+            { errno  : 0/-1,errmsg :操作成功/参数错误 ,data :[] }
+
+
+## 将用户移除出黑名单 [/black/del]
++ Parameters
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+    + deluserid (required, string, `360U1301556356`) ...被删除用户的id.
+  
+## 将用户移除出黑名单 [POST]
++ Response 200 (application/json)
+    + Body
+
+            { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}
+
+# Group request请求
+## 发送请求 [/request/send]
++ Parameters
+    + fromuserid (required, string, `360U1301556539`) ...用户本人id.
+    + touserid (required, string, `360U1301556356`) ...目标用户的id.
+    + type (required, number, `1`) ...请求类型 friend为申请好友，play邀请玩游戏，2.....
+    + content (required, string, `大神，求队`) ...请求内容.
+  
+## 发送请求 [POST]
++ Response 200 (application/json)
+    + Body
+
+            { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}
+
+## 获取用户发送过请求列表 [/request/sendedlist?userid={userid}]
++ Parameters
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+
+## 获取用户发送过请求列表 [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+            "errno": 0,
+            "errmsg": "",
+            "data": [
+                {
+                    "from": "uid",
+                    "to": "uid",
+                    "time": "2014-12-09 13:56:10",
+                    "msg": "你好，我是zy，加下我吧",
+                    "status":""
+                },
+                {
+                    "from": "uid",
+                    "to": "uid",
+                    "time": "2014-12-09 13:56:10",
+                    "msg": "你好，我是zy，加下我吧",
+                    "status":""
+                },
+                {
+                    "from": "uid",
+                    "to": "uid",
+                    "time": "2014-12-09 13:56:10",
+                    "msg": "你好，我是rs，加下我吧",
+                    "status":""
+                } ]
+            }
+
+## 获取用户 接收到的 请求列表 [/request/receivedlist?userid={userid}]
++ Parameters
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+
+## 获取用户 接收到的 请求列表 [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+            "errno": 0,
+            "errmsg": "",
+            "data": [
+                {
+                    "from": "uid",
+                    "to": "uid",
+                    "time": "2014-12-09 13:56:10",
+                    "msg": "你好，我是zy，加下我吧",
+                    "status":""
+                },
+                {
+                    "from": "uid",
+                    "to": "uid",
+                    "time": "2014-12-09 13:56:10",
+                    "msg": "你好，我是zy，加下我吧",
+                    "status":""
+                },
+                {
+                    "from": "uid",
+                    "to": "uid",
+                    "time": "2014-12-09 13:56:10",
+                    "msg": "你好，我是rs，加下我吧",
+                    "status":""
+                } ]
+            }
+            
+# Group response响应
+## 发送响应 [/respone/send]
++ Parameters
+    + fromuserid (required, string, `360U1301556539`) ...用户本人id.
+    + touserid (required, string, `360U1301556356`) ...目标用户的id.
+    + result (required, Boolean, `true`) ...响应结果 true为同意；false为拒绝.
+
+## 发送响应 [POST]
++ Response 200 (application/json)
+    + Body
+
+             { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}
+            
+## 获取用户发送过响应列表 [/respone/sendedlist?userid={userid}]
++ Parameters
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+
+## 获取用户发送过响应列表 [GET]
++ Response 200 (application/json)
+    + Body
+
+           {
+            "errno": 0, 
+            "errmsg": "", 
+            "data": [
+                {
+                    "from": "uid", 
+                    "to": "uid", 
+                    "time": "2014-12-09 13:56:10", 
+                    "msg": "你好，我是zy，加下我吧",
+                    "status":0
+                }, 
+                {
+                    "from": "uid", 
+                    "to": "uid", 
+                    "time": "2014-12-09 13:56:10", 
+                    "msg": "你好，我是zy，加下我吧",
+                    "status":0
+                }, 
+                {
+                    "from": "uid", 
+                    "to": "uid", 
+                    "time": "2014-12-09 13:56:10", 
+                    "msg": "你好，我是rs，加下我吧",
+                    "status":1
+                }
+            ]}
+
+
+
+## 获取用户 接收到的 响应列表 [/respone/receivedlist?userid={userid}]
++ Parameters
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+
+## 获取用户 接收到的 响应列表 [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+    "errno": 0, 
+    "errmsg": "", 
+    "data": [
+        {
+            "from": "uid", 
+            "to": "uid", 
+            "time": "2014-12-09 13:56:10", 
+            "msg": "你好，我是zy，加下我吧",
+            "status":0
+        }, 
+        {
+            "from": "uid", 
+            "to": "uid", 
+            "time": "2014-12-09 13:56:10", 
+            "msg": "你好，我是zy，加下我吧",
+            "status":"0"
+        }, 
+        {
+            "from": "uid", 
+            "to": "uid", 
+            "time": "2014-12-09 13:56:10", 
+            "msg": "你好，我是rs，加下我吧",
+            "status":1
+        }
+    ]}
+
+            
+# Group 好友message
+## 向好友发送消息 [/friend/mbox/send]
++ Parameters
+
+    + srcuid (required, string, `360U1301556539`) ...源用户id.
+    + dstuid (required, string, `360U1301556356`) ...目标用户的id.
+    + content (required, string, `hi??`) ...messag内容
+
+## 向好友发送消息 [POST]
++ Response 200 (application/json)
+    + Body
+
+              { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}
+            
+## 获取消息 [/friend/mbox/get?srcuid={srcuid}&dstuid={dstuid}]
++ Parameters
+    + srcuid (required, string, `360U1301556539`) ...源用户id.
+    + dstuid (required, string, `360U1301556356`) ...目标用户的id.
+
+## 获取消息 [GET]
++ Response 200 (application/json)
+    + Body
+
+            {
+            "errno": 0, 
+            "errmsg": "", 
+            "data": [
+                {
+                    "from": "uid", 
+                    "to": "uid", 
+                    "time": "2014-12-09 13:56:10", 
+                    "msg": "你好，我是zy，加下我吧"
+                }, 
+                {
+                    "from": "uid", 
+                    "to": "uid", 
+                    "time": "2014-12-09 13:56:10", 
+                    "msg": "你好，我是zy，加下我吧"
+                }, 
+                {
+                    "from": "uid", 
+                    "to": "uid", 
+                    "time": "2014-12-09 13:56:10", 
+                    "msg": "你好，我是rs，加下我吧"
+                }
+            ]}
+         
+            
+## 获取与某个好友历史消息 [/friend/mbox/his?srcuid={srcuid}&dstuid={dstuid}&nodenum={nodenum}]
++ Parameters
+    + srcuid (required, string, `360U1301556539`) ...源用户id.
+    + dstuid (required, string, `360U1301556356`) ...目标用户的id.
+    + nodenum (required, number, `11`) ...最后一个节点位置，从1开始 递增，每次返回当前节点的下一个节点的聊天记录，一个节点存储一天的记录.
+    
+## 获取与某个好友历史消息 [GET]
++ Response 200 (application/json)
+    + Body
+
+        {
+        "errno": 0, 
+        "errmsg": "", 
+        "data": [
+            {
+                "from": "uid", 
+                "to": "uid", 
+                "time": "2014-12-09 13:56:10", 
+                "msg": "你好"
+            }, 
+            {
+                "from": "uid", 
+                "to": "uid", 
+                "time": "2014-12-09 13:56:14", 
+                "msg": "好久不见"
+            }, 
+            {
+                "from": "uid", 
+                "to": "uid", 
+                "time": "2014-12-09 13:57:18", 
+                "msg": "出来聚聚"
+            }
+        ]}
+
+            
+# Group 陌生人message             
+## 获取陌生人列表 [/stranger/lists?userid={userid}]
++ Parameters
+    + userid (required, string, `360U1301556539`) ...用户本人id.
+
+## 获取陌生人列表 [GET]
++ Response 200 (application/json)
+    + Body
+
+        {
+        "errno": 0, 
+        "errmsg": "", 
+        "data":  [
+                "uid1", 
+                "uid2", 
+                "uid3"
+            ]
+        }
+
+            
+## 向陌生人（在好友和自己黑名单以外的人）发送信息 [/stranger/mbox/send]
++ Parameters
+    + srcuid (required, string, `360U1301556539`) ...源用户id.
+    + dstuid (required, string, `360U1301556356`) ...目标用户的id.
+    + content (required, string, `在么？`) ...messag内容
+
+## 向陌生人（在好友和自己黑名单以外的人）发送信息[POST]
++ Response 200 (application/json)
+    + Body
+
+            { errno  : 0/-1,errmsg :操作成功/参数错误  ,data :[]}
+
+## 获取与某个陌生人当天的信息 [/stranger/mbox/get]
++ Parameters
+    + srcuid (required, string, `360U1301556539`) ...源用户id.
+    + dstuid (required, string, `360U1301556356`) ...目标用户的id.
+    
+
+## 获取与某个陌生人当天的信息[GET]
++ Response 200 (application/json) 
+    + Body
+
+            {
+                "errno": 0, 
+                "errmsg": "", 
+                "data": [
+                    {
+                        "from": "uid", 
+                        "to": "uid", 
+                        "time": "2014-12-09 13:56:10", 
+                        "msg": "你好，我是zy，加下我吧"
+                    }, 
+                    {
+                        "from": "uid", 
+                        "to": "uid", 
+                        "time": "2014-12-09 13:56:10", 
+                        "msg": "你好，我是zy，加下我吧"
+                    }, 
+                    {
+                        "from": "uid", 
+                        "to": "uid", 
+                        "time": "2014-12-09 13:56:10", 
+                        "msg": "你好，我是rs，加下我吧"
+                    }]
+            }
+            
+## 获取与某个陌生人历史信息 [/stranger/mbox/his]
++ Parameters
+    + srcuid (required, string, `360U1301556539`) ...源用户id.
+    + dstuid (required, string, `360U1301556356`) ...目标用户的id.
+    + nodenum (required, number, `11`) ...最后一个节点位置，从1开始 递增，每次返回当前节点的下一个节点的聊天记录，一个节点存储一天的记录.
+
+## 获取与某个陌生人历史信[GET]
++ Response 200 (application/json)
+    + Body
+
+           {
+    "errno": 0, 
+    "errmsg": "", 
+    "data": [
+        {
+            "from": "uid", 
+            "to": "uid", 
+            "time": "2014-12-09 13:56:10", 
+            "msg": "你好，我是zy，加下我吧"
+        }, 
+        {
+            "from": "uid", 
+            "to": "uid", 
+            "time": "2014-12-09 13:56:10", 
+            "msg": "你好，我是zy，加下我吧"
+        }, 
+        {
+            "from": "uid", 
+            "to": "uid", 
+            "time": "2014-12-09 13:56:10", 
+            "msg": "你好，我是rs，加下我吧"
+        }
+    ]}
+
+            
